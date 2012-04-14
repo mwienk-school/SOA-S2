@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://www.PAHospital.org/PatService/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.PAHospital.org/PatService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
+  <types>
+    <xsd:schema targetNamespace="http://www.PAHospital.org/PatService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="Patient">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="PatientName" type="xsd:string"/>
+            <xsd:element name="PatientStreet" type="xsd:string"/>
+            <xsd:element name="PatientZipCode" type="xsd:int"/>
+            <xsd:element name="PatientCity" type="xsd:string"/>
+            <xsd:element name="PatientBirthday" type="xsd:date"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IDsList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PatientID" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RadiologyReport">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="RadiologyOrderID" type="xsd:string"/>
+            <xsd:element name="DateOfExamination" type="xsd:date"/>
+            <xsd:element name="ReportText" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="LabReport">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="LabOrderID" type="xsd:string"/>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="SampleID" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" name="LabValues">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="LabParameter" type="xsd:string"/>
+                  <xsd:element name="LabValue" type="xsd:decimal"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PatientName" type="xsd:string"/>
+      <xsd:element name="PatientID" type="xsd:string"/>
+      <xsd:element name="OrderID" type="xsd:string"/>
+      <xsd:element name="LabReportOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="LabOrderID" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RadiologyReportOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="RadiologyOrderID" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="RetrieveLabReportRequest">
+    <part name="LabReportOrder" element="s0:LabReportOrder">
+    </part>
+  </message>
+  <message name="GetPatientIDsRequest">
+    <part name="PatientName" element="s0:PatientName">
+    </part>
+  </message>
+  <message name="RetrieveLabReportResponse">
+    <part name="LabReport" element="s0:LabReport">
+    </part>
+  </message>
+  <message name="StoreRadiologyReportRequest">
+    <part name="RadiologyReport" element="s0:RadiologyReport">
+    </part>
+  </message>
+  <message name="GetPatientIDsResponse">
+    <part name="PatientIDsList" element="s0:IDsList">
+    </part>
+  </message>
+  <message name="GetPatientByIDRequest">
+    <part name="PatientID" element="s0:PatientID">
+    </part>
+  </message>
+  <message name="StoreLabReportRequest">
+    <part name="LabReport" element="s0:LabReport">
+    </part>
+  </message>
+  <message name="CreatePatientRecordRequest">
+    <part name="Patient" element="s0:Patient">
+    </part>
+  </message>
+  <message name="CreatePatientRecordResponse">
+    <part name="PatientID" element="s0:PatientID">
+    </part>
+  </message>
+  <message name="GetPatientByIDResponse">
+    <part name="Patient" element="s0:Patient">
+    </part>
+  </message>
+  <message name="RetrieveRadiologyReportRequest">
+    <part name="RadiologyReportOrder" element="s0:RadiologyReportOrder">
+    </part>
+  </message>
+  <message name="RetrieveRadiologyReportResponse">
+    <part name="RadiologyReport" element="s0:RadiologyReport">
+    </part>
+  </message>
+  <portType name="ElectronicPatientRecord">
+    <operation name="GetPatientIDsByName">
+      <input message="s0:GetPatientIDsRequest">
+    </input>
+      <output message="s0:GetPatientIDsResponse">
+    </output>
+    </operation>
+    <operation name="GetPatientByID">
+      <input message="s0:GetPatientByIDRequest">
+    </input>
+      <output message="s0:GetPatientByIDResponse">
+    </output>
+    </operation>
+    <operation name="CreatePatientRecord">
+      <input message="s0:CreatePatientRecordRequest">
+    </input>
+      <output message="s0:CreatePatientRecordResponse">
+    </output>
+    </operation>
+    <operation name="StoreRadiologyReport">
+      <input message="s0:StoreRadiologyReportRequest">
+    </input>
+    </operation>
+    <operation name="StoreLabReport">
+      <input message="s0:StoreLabReportRequest">
+    </input>
+    </operation>
+    <operation name="RetrieveLabReport">
+      <input message="s0:RetrieveLabReportRequest">
+    </input>
+      <output message="s0:RetrieveLabReportResponse">
+    </output>
+    </operation>
+    <operation name="RetrieveRadiologyReport">
+      <input message="s0:RetrieveRadiologyReportRequest">
+    </input>
+      <output message="s0:RetrieveRadiologyReportResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="PatientRecordBinding" type="s0:ElectronicPatientRecord">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetPatientIDsByName">
+      <soap:operation soapAction="http://www.PAHospital.org/PatService/GetPatientIDsByName"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetPatientByID">
+      <soap:operation soapAction="http://www.PAHospital.org/PatService/GetPatientByID"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CreatePatientRecord">
+      <soap:operation soapAction="http://www.PAHospital.org/PatService/CreatePatientRecord"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="StoreRadiologyReport">
+      <soap:operation soapAction="http://www.PAHospital.org/PatService/StoreRadiologyReport"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+    <operation name="StoreLabReport">
+      <soap:operation soapAction="http://www.PAHospital.org/PatService/StoreLabReport"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+    <operation name="RetrieveLabReport">
+      <soap:operation soapAction="http://www.PAHospital.org/PatService/RetrieveLabReport"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="RetrieveRadiologyReport">
+      <soap:operation soapAction="http://www.PAHospital.org/PatService/RetrieveRadiologyReport"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="PatService">
+    <port name="PatientRecordPort" binding="s0:PatientRecordBinding">
+      <soap:address location="http://localhost:9080/S2_-_PAT/services/PatService/"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.6.1  Built on : Aug 31, 2011 (12:22:40 CEST) -->
+<serviceGroup>
+    <service name="PatService">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.pahospital.www.patservice.PatServiceMessageReceiverInOut"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.pahospital.www.patservice.PatServiceMessageReceiverInOnly"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.pahospital.www.patservice.PatServiceSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="RetrieveRadiologyReport" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.PAHospital.org/PatService/">
+            <actionMapping>http://www.PAHospital.org/PatService/RetrieveRadiologyReport</actionMapping>
+            <outputActionMapping>http://www.PAHospital.org/PatService/ElectronicPatientRecord/RetrieveRadiologyReportResponse</outputActionMapping>
+        </operation>
+        <operation name="StoreLabReport" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.PAHospital.org/PatService/">
+            <actionMapping>http://www.PAHospital.org/PatService/StoreLabReport</actionMapping>
+        </operation>
+        <operation name="CreatePatientRecord" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.PAHospital.org/PatService/">
+            <actionMapping>http://www.PAHospital.org/PatService/CreatePatientRecord</actionMapping>
+            <outputActionMapping>http://www.PAHospital.org/PatService/ElectronicPatientRecord/CreatePatientRecordResponse</outputActionMapping>
+        </operation>
+        <operation name="GetPatientIDsByName" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.PAHospital.org/PatService/">
+            <actionMapping>http://www.PAHospital.org/PatService/GetPatientIDsByName</actionMapping>
+            <outputActionMapping>http://www.PAHospital.org/PatService/ElectronicPatientRecord/GetPatientIDsByNameResponse</outputActionMapping>
+        </operation>
+        <operation name="GetPatientByID" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.PAHospital.org/PatService/">
+            <actionMapping>http://www.PAHospital.org/PatService/GetPatientByID</actionMapping>
+            <outputActionMapping>http://www.PAHospital.org/PatService/ElectronicPatientRecord/GetPatientByIDResponse</outputActionMapping>
+        </operation>
+        <operation name="RetrieveLabReport" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.PAHospital.org/PatService/">
+            <actionMapping>http://www.PAHospital.org/PatService/RetrieveLabReport</actionMapping>
+            <outputActionMapping>http://www.PAHospital.org/PatService/ElectronicPatientRecord/RetrieveLabReportResponse</outputActionMapping>
+        </operation>
+        <operation name="StoreRadiologyReport" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.PAHospital.org/PatService/">
+            <actionMapping>http://www.PAHospital.org/PatService/StoreRadiologyReport</actionMapping>
+        </operation>
+    </service>
+</serviceGroup>

@@ -1,0 +1,42 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from LabCallbackService WSDL service -->
+
+  <service name="LabCallbackPort" provider="java:RPC" style="document" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://www.PAHospital.org/LabCallbackService/"/>
+      <parameter name="wsdlServiceElement" value="LabCallbackService"/>
+      <parameter name="schemaUnqualified" value="http://www.PAHospital.org/LabCallbackService/"/>
+      <parameter name="wsdlServicePort" value="LabCallbackPort"/>
+      <parameter name="className" value="org.PAHospital.www.LabCallbackService.LabCallbackBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="LabCallback"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="http://www.PAHospital.org/LabCallbackService/"
+        qname="ns:>LabReport"
+        type="java:org.PAHospital.www.LabCallbackService.LabReport"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://www.PAHospital.org/LabCallbackService/"
+        qname="ns:>>LabReport>LabValues"
+        type="java:org.PAHospital.www.LabCallbackService.LabReportLabValues"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

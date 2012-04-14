@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://www.PAHospital.org/TransportationService/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.PAHospital.org/TransportationService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
+  <types>
+    <xsd:schema targetNamespace="http://www.PAHospital.org/TransportationService/">
+      <xsd:element name="PatientOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="RequestingUnit" type="xsd:string"/>
+            <xsd:element name="DestinationUnit" type="xsd:string"/>
+            <xsd:element name="TransportationDate" type="xsd:dateTime"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SampleOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="RequestingUnit" type="xsd:string"/>
+            <xsd:element name="SampleID" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="OrderSampleTransportRequest">
+    <part name="SampleTransportOrder" element="s0:SampleOrder">
+    </part>
+  </message>
+  <message name="OrderPatientTransportRequest">
+    <part name="PatientTransportOrder" element="s0:PatientOrder">
+    </part>
+  </message>
+  <portType name="Transportation">
+    <operation name="OrderPatientTransport">
+      <input name="PatientTransport" message="s0:OrderPatientTransportRequest">
+    </input>
+    </operation>
+    <operation name="OrderSampleTransport">
+      <input name="SampleTransport" message="s0:OrderSampleTransportRequest">
+    </input>
+    </operation>
+  </portType>
+  <binding name="TransportationBinding" type="s0:Transportation">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="OrderPatientTransport">
+      <soap:operation soapAction="http://www.PAHospital.org/TransportationService/OrderPatientTransport"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+    <operation name="OrderSampleTransport">
+      <soap:operation soapAction="http://www.PAHospital.org/TransportationService/OrderSampleTransport"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="TransportationService">
+    <port name="TransportationPort" binding="s0:TransportationBinding">
+      <soap:address location="http://localhost:9080/S2_-_TRANS/services/TransportationService"/>
+    </port>
+  </service>
+</definitions>

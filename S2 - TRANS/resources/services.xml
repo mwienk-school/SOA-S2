@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.6.1  Built on : Aug 31, 2011 (12:22:40 CEST) -->
+<serviceGroup>
+    <service name="TransportationService">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.pahospital.www.transportationservice.TransportationServiceMessageReceiverInOnly"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.pahospital.www.transportationservice.TransportationServiceSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="OrderPatientTransport" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.PAHospital.org/TransportationService/">
+            <actionMapping>http://www.PAHospital.org/TransportationService/OrderPatientTransport</actionMapping>
+        </operation>
+        <operation name="OrderSampleTransport" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.PAHospital.org/TransportationService/">
+            <actionMapping>http://www.PAHospital.org/TransportationService/OrderSampleTransport</actionMapping>
+        </operation>
+    </service>
+</serviceGroup>

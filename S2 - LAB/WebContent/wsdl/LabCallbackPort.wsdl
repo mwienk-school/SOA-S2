@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="http://www.PAHospital.org/LabCallbackService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.PAHospital.org/LabCallbackService/">
+
+  <types>
+    <xsd:schema targetNamespace="http://www.PAHospital.org/LabCallbackService/">
+      <xsd:element name="LabReport">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="LabOrderID" type="xsd:string"/>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="SampleID" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" name="LabValues">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="LabParameter" type="xsd:string"/>
+                  <xsd:element name="LabValue" type="xsd:decimal"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="SendLabReportResponse">
+    <part element="s0:LabReport" name="LabReport"/>
+  </message>
+
+  <portType name="LabCallback">
+    <operation name="SendLabReport">
+      <input message="s0:SendLabReportResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="LabCallbackBinding" type="s0:LabCallback">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="SendLabReport">
+      <soap:operation soapAction="http://www.PAHospital.org/LabCallbackService/SendLabReport"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+  </binding>
+
+  <!-- Service defines the address of Web service -->
+  <service name="LabCallbackService">
+    <port binding="s0:LabCallbackBinding" name="LabCallbackPort">
+      <soap:address location="http://localhost:9080/S2_-_LAB/services/LabCallbackPort"/>
+    </port>
+  </service>
+  
+</definitions>

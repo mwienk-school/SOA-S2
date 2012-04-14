@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://www.PAHospital.org/LabService/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.PAHospital.org/LabService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
+  <types>
+    <xsd:schema targetNamespace="http://www.PAHospital.org/LabService/">
+      <xsd:element name="LabOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PatientID" type="xsd:string"/>
+            <xsd:element name="CaseID" type="xsd:string"/>
+            <xsd:element name="SampleID" type="xsd:string"/>
+            <xsd:element name="SampleMaterial">
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:enumeration value="BLOOD"/>
+                  <xsd:enumeration value="URINE"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+            <xsd:element maxOccurs="unbounded" name="LabParameter" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="LabOrderId" type="xsd:string"/>
+    </xsd:schema>
+  </types>
+  <message name="LaboratoryOrderLabTestRequest">
+    <part name="LabOrder" element="s0:LabOrder">
+    </part>
+  </message>
+  <message name="LaboratoryOrderLabTestResponse">
+    <part name="LabOrderID" element="s0:LabOrderId">
+    </part>
+  </message>
+  <portType name="Laboratory">
+    <operation name="OrderLabTest">
+      <input message="s0:LaboratoryOrderLabTestRequest">
+    </input>
+      <output message="s0:LaboratoryOrderLabTestResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="LabBinding" type="s0:Laboratory">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="OrderLabTest">
+      <soap:operation soapAction="http://www.PAHospital.org/LabService/OrderLabTest"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="LabService">
+    <port name="LabPort" binding="s0:LabBinding">
+      <soap:address location="http://localhost:9080/S2_-_LAB/services/LabService"/>
+    </port>
+  </service>
+</definitions>

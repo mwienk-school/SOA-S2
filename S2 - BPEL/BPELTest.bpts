@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tes:testSuite xmlns:tes="http://www.bpelunit.org/schema/testSuite" xmlns:war="http://www.PAHospital.org/WardService/">
+    <tes:name>BPELTest.bpts</tes:name>
+    <tes:baseURL>http://localhost:7777/ws</tes:baseURL>
+    <tes:deployment>
+        <tes:put name="Ward" type="fixed">
+            <tes:wsdl>bpelContent/WardArtifacts.wsdl</tes:wsdl>
+        </tes:put>
+    </tes:deployment>
+    <tes:testCases>
+        <tes:testCase name="FirstTest" basedOn="" abstract="false" vary="false">
+            <tes:clientTrack>
+                <tes:sendReceive service="war:Ward" port="WardPort" operation="OrderPatientTreatment">
+                    <tes:send service="war:Ward" port="WardPort" fault="false">
+                        <tes:data>
+                            <war:PatientTreatmentOrder>
+                                <PatientID>123</PatientID>
+                                <PatientName>Vincent</PatientName>
+                            </war:PatientTreatmentOrder>
+                        </tes:data>
+                    </tes:send>
+                    <tes:receive service="war:Ward" port="WardPort" fault="false"/>
+                </tes:sendReceive>
+            </tes:clientTrack>
+        </tes:testCase>
+    </tes:testCases>
+</tes:testSuite>

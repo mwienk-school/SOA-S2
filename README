@@ -1,0 +1,43 @@
+=========================================
+BBBBBBBBB PPPPPPPPP EEEEEEEEEE LL
+BB    BBB PP     PP EE         LL
+BB    BB  PP     PP EE         LL
+BBBBBBB   PPPPPPPPP EEEEEEEEE  LL
+BB    BB  PP        EE         LL
+BB    BBB PP        EE         LL
+BBBBBBBBB PP        EEEEEEEEEE LLLLLLLLLL
+=========================================
+
+TODO: 
+-Rood in verslag
+-Testing
+-Volgens mij wordt de ELSE clause nooit aangeroepen (er wordt nooit een nieuwe patient gemaakt)
+-De payment hoeft niet gedaan te worden, er komt altijd een bericht terug?
+-De physician moet een WSDL hebben (niet maken, vermelden)
+-De payment eigenlijk ook
+
+HOWTO DERBY
+----
+Download derby van de apache website (db.apache.org/derby)
+
+1. In de /bin map van Derby staat een file setEmbeddedCP, voer die uit.
+2. Check met echo $CLASSPATH of de derby klassen zijn toegevoegd
+3. in je .bashrc in de home map (in mijn geval):
+    export DERBY_HOME=/home/mark/Apps/Dev/Derby
+    export PATH="$DERBY_HOME/bin:$PATH"
+4. Kan zijn dat je dan de files uit de zip moet gebruiken, dan een db reset door de CreateTable.java te runnen:
+   -uncomment een van de drie methodes deed 't mij bij (3x runnen)
+        //db.createLabReport(conn);
+        //db.createPatientRecord(conn);
+        //db.createRadiologyRecord(conn);
+5. Vergeet niet om de derby.jar in de lib map van  Tomcat te zetten.
+6. Zoniet, dan succes :-S
+7. Doe ongeveer hetzelfde voor de mysql jdbc driver (in je CP zetten en in Tomcat lib map zetten, dan tomcat opnieuw starten).
+
+HOWTO BPELUnit
+----
+1. Kies in Eclipse: Help -> Install new Software...
+2. Voeg deze update site toe: http://update.bpelunit.net
+3. Installeer de hele ellende
+4. Rechtsklikken op TestSuite -> Run as... -> BPELUnit TestSuite
+
