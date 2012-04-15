@@ -70,18 +70,12 @@
 	<message name="WardOrderPatientTreatmentResponse">
 		<part element="s0:DischargeLetter" name="DischargeLetter"/>
 	</message>
-	<message name="WardDischargeLetter">
-		<part element="s0:DischargeLetter" name="DischargeLetter"/>
-	</message>
 
 	<!-- Ward portType (operations) definitions -->
 	<portType name="Ward">
 		<operation name="OrderPatientTreatment">
 			<input message="s0:WardOrderPatientTreatmentRequest"/>
 			<output message="s0:WardOrderPatientTreatmentResponse"/>
-		</operation>
-		<operation name="ReceiveDischargeLetter">
-			<input message="s0:WardDischargeLetter"/>
 		</operation>
 	</portType>
 
@@ -96,12 +90,6 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
-		</operation>
-		<operation name="ReceiveDischargeLetter">
-			<soap:operation soapAction="http://www.PAHospital.org/WardService/ReceiveDischargeLetter"/>
-			<input>
-				<soap:body use="literal"/>
-			</input>
 		</operation>
 	</binding>
 
