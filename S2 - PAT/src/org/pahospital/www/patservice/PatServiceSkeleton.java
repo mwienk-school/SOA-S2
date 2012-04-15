@@ -92,7 +92,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 
 	public void storeLabReport(
 			org.pahospital.www.patservice.LabReport labReport6) {
-		System.out.println("PAT ==> Storint lab report");
+		System.out.println("PAT ==> Storing lab report");
 		AccessDB db = new AccessDB();
 		Connection conn = db
 				.dbConnect(
@@ -219,6 +219,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 
 	public org.pahospital.www.patservice.IDsList getPatientIDsByName(
 			org.pahospital.www.patservice.PatientName patientName9) {
+		System.out.println("PAT ==> GET Patient ID by Name");
 		IDsList idlist = new IDsList();
 		AccessDB db = new AccessDB();
 
@@ -249,7 +250,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("PAT ==> Returning ID");
 		return idlist;
 		// TODO : fill this with the necessary business logic
 		// throw new java.lang.UnsupportedOperationException("Please implement "
@@ -265,6 +266,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 
 	public org.pahospital.www.patservice.Patient getPatientByID(
 			org.pahospital.www.patservice.PatientID patientID11) {
+		System.out.println("PAT ==> GET Patient by ID");
 		Patient patRecord = new Patient();
 		AccessDB db = new AccessDB();
 
@@ -388,7 +390,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 
 	public void storeRadiologyReport(
 			org.pahospital.www.patservice.RadiologyReport radiologyReport15) {
-		System.out.println("PAT ==> Storint rad report");
+		System.out.println("PAT ==> Storing rad report");
 		AccessDB db = new AccessDB();
 		Connection conn = db
 				.dbConnect(
@@ -438,6 +440,7 @@ class AccessDB {
 
 	public Connection dbConnect(String db_connect_string, String db_userid,	String db_password) {
 		try {
+			System.out.println("PAT ==> Connect to DB");
             new EmbeddedDriver();
 			Connection conn = DriverManager.getConnection(db_connect_string,
 					db_userid, db_password);
