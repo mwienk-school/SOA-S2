@@ -11,6 +11,7 @@ public class CreateTable
         //db.createLabReport(conn);
         //db.createPatientRecord(conn);
         //db.createRadiologyRecord(conn);
+        db.emptyTables(conn);
         System.out.println("connected!!!!");
     }
 }
@@ -110,5 +111,32 @@ class DB
         {
             e.printStackTrace();
         }
+    }
+    
+    public void emptyTables(Connection conn)
+    {
+    	String query;
+    	Statement stmt;
+    	
+    	try
+    	{
+    		 query="delete from lab_record";    	                
+    	                stmt = conn.createStatement();
+    	                stmt.executeUpdate(query);
+    	                stmt.close();
+    	     query="delete from patient_record";
+    	     			stmt = conn.createStatement();
+    	     			stmt.executeUpdate(query);
+    	     			stmt.close();
+    	     query="delete from radiology_record";
+    	     			stmt = conn.createStatement();
+    	     			stmt.executeUpdate(query);
+    	     			stmt.close();
+    	     			conn.close();
+    	}
+    	catch (Exception e)
+    	{
+    		e.printStackTrace();
+    	}
     }
 };

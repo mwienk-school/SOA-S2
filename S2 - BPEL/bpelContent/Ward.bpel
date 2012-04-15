@@ -143,59 +143,10 @@
 		<bpel:invoke name="Invoke-GetPatientID" partnerLink="PatService"
 			operation="GetPatientIDsByName" inputVariable="GetPatientIDRequest"
 			outputVariable="GetPatientIDResponse" />
-		<bpel:if name="If-PatientExists">
-			<bpel:condition><![CDATA[number($GetPatientIDResponse.PatientIDsList/PatientID) = $GetPatientIDResponse.PatientIDsList/PatientID]]></bpel:condition>
-			<bpel:sequence name="ExistingPatient">
-				<bpel:assign validate="no" name="Assign-PatientID">
-					<bpel:copy>
-						<bpel:from>
-							<bpel:literal>
-								<s0:LabOrder xmlns:s0="http://www.PAHospital.org/LabService/"
-									xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-									<PatientID>PatientID</PatientID>
-									<CaseID>CaseID</CaseID>
-									<SampleID>SampleID</SampleID>
-									<SampleMaterial>BLOOD</SampleMaterial>
-									<LabParameter>LabParameter</LabParameter>
-								</s0:LabOrder>
-							</bpel:literal>
-						</bpel:from>
-						<bpel:to variable="OrderLabTestRequest" part="LabOrder"></bpel:to>
-					</bpel:copy>
-					<bpel:copy>
-						<bpel:from>
-							<bpel:literal>
-								<s0:RadiologyOrder xmlns:s0="http://www.PAHospital.org/RadiologyService/"
-									xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-									<PatientID>PatientID</PatientID>
-									<CaseID>CaseID</CaseID>
-									<ExaminationType>XRAY</ExaminationType>
-								</s0:RadiologyOrder>
-							</bpel:literal>
-						</bpel:from>
-						<bpel:to variable="OrderRadiologyExamRequest" part="Order"></bpel:to>
-					</bpel:copy>
-					<bpel:copy>
-						<bpel:from part="PatientIDsList" variable="GetPatientIDResponse">
-							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID[1]]]></bpel:query>
-						</bpel:from>
-						<bpel:to part="Order" variable="OrderRadiologyExamRequest">
-							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID]]></bpel:query>
-						</bpel:to>
-					</bpel:copy>
-					<bpel:copy>
-						<bpel:from part="PatientIDsList" variable="GetPatientIDResponse">
-							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID[1]]]></bpel:query>
-						</bpel:from>
-						<bpel:to part="LabOrder" variable="OrderLabTestRequest">
-							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID]]></bpel:query>
-						</bpel:to>
-					</bpel:copy>
-
-				</bpel:assign>
-			</bpel:sequence>
-			<bpel:else>
-				<bpel:sequence name="NewPatient">
+        
+        <bpel:if name="If-NewPatient">
+			<bpel:condition><![CDATA[$GetPatientIDResponse.PatientIDsList/PatientID=""]]></bpel:condition>
+			<bpel:sequence name="NewPatient">
 					<bpel:invoke name="Invoke-CreatePatient" partnerLink="PatService"
 						operation="CreatePatientRecord" portType="pat:ElectronicPatientRecord"
 						inputVariable="CreatePatientRequest" outputVariable="CreatePatientResponse" />
@@ -246,6 +197,55 @@
 						</bpel:copy>
 					</bpel:assign>
 				</bpel:sequence>
+			<bpel:else>
+				<bpel:sequence name="ExistingPatient">
+				<bpel:assign validate="no" name="Assign-PatientID">
+					<bpel:copy>
+						<bpel:from>
+							<bpel:literal>
+								<s0:LabOrder xmlns:s0="http://www.PAHospital.org/LabService/"
+									xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+									<PatientID>PatientID</PatientID>
+									<CaseID>CaseID</CaseID>
+									<SampleID>SampleID</SampleID>
+									<SampleMaterial>BLOOD</SampleMaterial>
+									<LabParameter>LabParameter</LabParameter>
+								</s0:LabOrder>
+							</bpel:literal>
+						</bpel:from>
+						<bpel:to variable="OrderLabTestRequest" part="LabOrder"></bpel:to>
+					</bpel:copy>
+					<bpel:copy>
+						<bpel:from>
+							<bpel:literal>
+								<s0:RadiologyOrder xmlns:s0="http://www.PAHospital.org/RadiologyService/"
+									xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+									<PatientID>PatientID</PatientID>
+									<CaseID>CaseID</CaseID>
+									<ExaminationType>XRAY</ExaminationType>
+								</s0:RadiologyOrder>
+							</bpel:literal>
+						</bpel:from>
+						<bpel:to variable="OrderRadiologyExamRequest" part="Order"></bpel:to>
+					</bpel:copy>
+					<bpel:copy>
+						<bpel:from part="PatientIDsList" variable="GetPatientIDResponse">
+							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID[1]]]></bpel:query>
+						</bpel:from>
+						<bpel:to part="Order" variable="OrderRadiologyExamRequest">
+							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID]]></bpel:query>
+						</bpel:to>
+					</bpel:copy>
+					<bpel:copy>
+						<bpel:from part="PatientIDsList" variable="GetPatientIDResponse">
+							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID[1]]]></bpel:query>
+						</bpel:from>
+						<bpel:to part="LabOrder" variable="OrderLabTestRequest">
+							<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[PatientID]]></bpel:query>
+						</bpel:to>
+					</bpel:copy>
+				</bpel:assign>
+			</bpel:sequence>
 			</bpel:else>
 		</bpel:if>
 

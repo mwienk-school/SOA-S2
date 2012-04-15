@@ -162,6 +162,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 
 	public org.pahospital.www.patservice.PatientID createPatientRecord(
 			org.pahospital.www.patservice.Patient patient7) {
+		System.out.println("PAT ==> Creating new patient");
 		PatientID createRecord = new PatientID();
 		createRecord.setPatientID("failed");
 
@@ -217,8 +218,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 	 * @return iDsList10
 	 */
 
-	public org.pahospital.www.patservice.IDsList getPatientIDsByName(
-			org.pahospital.www.patservice.PatientName patientName9) {
+	public org.pahospital.www.patservice.IDsList getPatientIDsByName(org.pahospital.www.patservice.PatientName patientName9) {
 		System.out.println("PAT ==> GET Patient ID by Name");
 		IDsList idlist = new IDsList();
 		AccessDB db = new AccessDB();
@@ -240,17 +240,17 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 				}
 			}
 
-			if (i == 0)
-				throw new java.lang.UnsupportedOperationException(
-						"The name doesn't exist in the database");
-
+			if (i == 0) idlist.addPatientID("");
+			
 			rs.close();
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			idlist = null;
 		}
 		System.out.println("PAT ==> Returning ID");
+		System.out.println("ID(s): ==== ");
+		for(String str : idlist.getPatientID()) { System.out.println(str); }
 		return idlist;
 		// TODO : fill this with the necessary business logic
 		// throw new java.lang.UnsupportedOperationException("Please implement "
