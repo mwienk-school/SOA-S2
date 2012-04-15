@@ -80,6 +80,7 @@ public class RadiologyServiceSkeleton implements RadiologyServiceSkeletonInterfa
 		System.out.println("RAD ==> Make Payment Request");
 		//Set RadiologyOrder as paid
 		if(!payments.get(radiologyOrderIDForPayment.getRadiologyOrderIDForPayment())) {
+			orderStatuses.get(radiologyOrderIDForPayment.getRadiologyOrderIDForPayment()).setOrderStatus("payed");
 			payments.put(radiologyOrderIDForPayment.getRadiologyOrderIDForPayment(),true);
 		} else {
 			throw new SOAPException("This order has already been paid");

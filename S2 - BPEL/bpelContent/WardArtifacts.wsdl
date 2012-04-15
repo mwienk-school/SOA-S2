@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:lab="http://www.PAHospital.org/LabService/" xmlns:labcb="http://www.PAHospital.org/LabCallbackService/" xmlns:pat="http://www.PAHospital.org/PatService/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:rad="http://www.PAHospital.org/RadiologyService/" xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/" xmlns:s0="http://www.PAHospital.org/WardService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.PAHospital.org/WardService/" xmlns:ts="http://www.PAHospital.org/TransportationService/" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Ward" targetNamespace="http://www.PAHospital.org/WardService/">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" 
+			 xmlns:lab="http://www.PAHospital.org/LabService/" 
+			 xmlns:labcb="http://www.PAHospital.org/LabCallbackService/" 
+			 xmlns:pat="http://www.PAHospital.org/PatService/" 
+			 xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" 
+			 xmlns:rad="http://www.PAHospital.org/RadiologyService/" 
+			 xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/" 
+			 xmlns:s0="http://www.PAHospital.org/WardService/" 
+			 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+			 xmlns:tns="http://www.PAHospital.org/WardService/" 
+			 xmlns:ts="http://www.PAHospital.org/TransportationService/" 
+			 xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" 
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			 name="Ward" 
+			 targetNamespace="http://www.PAHospital.org/WardService/">
 
 	<!-- Imports -->
+    <import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/"/>
+    <import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/"/>
+    <import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/"/>
+    <import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/"/>
+    <import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/"/>
+    <import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/"/>
 
 	<!-- PartnerLinkTypes -->
 	<plnk:partnerLinkType name="WardPLT">
@@ -26,19 +46,14 @@
     <vprop:property name="RadiologyOrderID" type="xsd:string"/>
     <vprop:propertyAlias messageType="rad:RadiologyOrderRadExaminationResponse" part="RadiologyOrderID" propertyName="s0:RadiologyOrderID"/>
     <vprop:propertyAlias messageType="radcb:RadiologyReportRequest" part="RadiologyReport" propertyName="s0:RadiologyOrderID">
-    <vprop:query><![CDATA[/RadiologyOrderID]]></vprop:query>
-  </vprop:propertyAlias>
+    	<vprop:query><![CDATA[/RadiologyOrderID]]></vprop:query>
+  	</vprop:propertyAlias>
     <vprop:property name="LaboratoryOrderID" type="xsd:string"/>
     <vprop:propertyAlias messageType="lab:LaboratoryOrderLabTestResponse" part="LabOrderID" propertyName="s0:LaboratoryOrderID"/>
     <vprop:propertyAlias messageType="labcb:SendLabReportResponse" part="LabReport" propertyName="s0:LaboratoryOrderID">
-    <vprop:query><![CDATA[/LabOrderID]]></vprop:query>
-  </vprop:propertyAlias>
-    <import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/"/>
-    <import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/"/>
-    <import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/"/>
-    <import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/"/>
-    <import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/"/>
-    <import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/"/>
+    	<vprop:query><![CDATA[/LabOrderID]]></vprop:query>
+  	</vprop:propertyAlias>
+
     <types>
 		<xsd:schema targetNamespace="http://www.PAHospital.org/WardService/">
 			<xsd:element name="PatientTreatmentOrder">
@@ -56,14 +71,7 @@
 						<xsd:element name="message" type="xsd:string"/>
 					</xsd:sequence>
 				</xsd:complexType>
-			</xsd:element>			<xsd:element name="PaymentRequest">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="amount" type="xsd:string"/>
-						<xsd:element name="date" type="xsd:string"/>
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
+			</xsd:element>			
 		</xsd:schema>
 	</types>
 
@@ -74,15 +82,8 @@
 	<message name="WardOrderPatientTreatmentResponse">
 		<part element="s0:DischargeLetter" name="DischargeLetter"/>
 	</message>
-	<message name="WardPaymentRequest">
-		<part element="s0:PaymentRequest" name="PaymentRequest"/>
-	</message>
 	<message name="WardDischargeLetter">
 		<part element="s0:DischargeLetter" name="DischargeLetter"/>
-	</message>
-	<message name="WardReviewReports">
-		<part element="radcb:RadiologyReport" name="LabReport"/>
-		<part element="labcb:LabReport" name="RadReport"/>
 	</message>
 
 	<!-- Ward portType (operations) definitions -->
@@ -90,9 +91,6 @@
 		<operation name="OrderPatientTreatment">
 			<input message="s0:WardOrderPatientTreatmentRequest"/>
 			<output message="s0:WardOrderPatientTreatmentResponse"/>
-		</operation>
-		<operation name="ReceivePayment">
-			<input message="s0:WardPaymentRequest"/>
 		</operation>
 		<operation name="ReceiveDischargeLetter">
 			<input message="s0:WardDischargeLetter"/>
@@ -110,12 +108,6 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
-		</operation>
-		<operation name="ReceivePayment">
-			<soap:operation soapAction="http://www.PAHospital.org/WardService/ReceivePayment"/>
-			<input>
-				<soap:body use="literal"/>
-			</input>
 		</operation>
 		<operation name="ReceiveDischargeLetter">
 			<soap:operation soapAction="http://www.PAHospital.org/WardService/ReceiveDischargeLetter"/>
