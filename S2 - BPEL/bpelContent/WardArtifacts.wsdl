@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" 
-			 xmlns:lab="http://www.PAHospital.org/LabService/" 
-			 xmlns:labcb="http://www.PAHospital.org/LabCallbackService/" 
-			 xmlns:pat="http://www.PAHospital.org/PatService/" 
-			 xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" 
-			 xmlns:rad="http://www.PAHospital.org/RadiologyService/" 
-			 xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/" 
-			 xmlns:s0="http://www.PAHospital.org/WardService/" 
-			 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-			 xmlns:tns="http://www.PAHospital.org/WardService/" 
-			 xmlns:ts="http://www.PAHospital.org/TransportationService/" 
-			 xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" 
-			 xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-			 name="Ward" 
-			 targetNamespace="http://www.PAHospital.org/WardService/">
-
-	<!-- Imports -->
-    <import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/"/>
-    <import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/"/>
-    <import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/"/>
-    <import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/"/>
-    <import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/"/>
-    <import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/"/>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:lab="http://www.PAHospital.org/LabService/" xmlns:labcb="http://www.PAHospital.org/LabCallbackService/" xmlns:pat="http://www.PAHospital.org/PatService/" xmlns:phys="http://www.PAHopital.org/PhysicianService/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:rad="http://www.PAHospital.org/RadiologyService/" xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/" xmlns:s0="http://www.PAHospital.org/WardService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.PAHospital.org/WardService/" xmlns:ts="http://www.PAHospital.org/TransportationService/" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Ward" targetNamespace="http://www.PAHospital.org/WardService/">
 
 	<!-- PartnerLinkTypes -->
+	<plnk:partnerLinkType name="PhysicianPLT">
+    	<plnk:role name="PhysicianService" portType="phys:PhysicianService"/>
+  	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="WardPLT">
 		<plnk:role name="WardService" portType="s0:Ward"/>
 	</plnk:partnerLinkType>
@@ -54,6 +35,14 @@
     	<vprop:query><![CDATA[/LabOrderID]]></vprop:query>
   	</vprop:propertyAlias>
 
+    <import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/"/>
+    <import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/"/>
+    <import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/"/>
+    <import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/"/>
+    <import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/"/>
+    <import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/"/>
+    <import location="PhysicianService.wsdl" namespace="http://www.PAHopital.org/PhysicianService/"/>
+    
     <types>
 		<xsd:schema targetNamespace="http://www.PAHospital.org/WardService/">
 			<xsd:element name="PatientTreatmentOrder">
@@ -67,8 +56,7 @@
 			<xsd:element name="DischargeLetter">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="name" type="xsd:string"/>
-						<xsd:element name="message" type="xsd:string"/>
+						<xsd:element name="body" type="xsd:string"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>			

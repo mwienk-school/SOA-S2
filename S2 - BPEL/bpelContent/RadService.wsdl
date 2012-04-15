@@ -3,7 +3,6 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
 	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="http://www.PAHospital.org/RadiologyService/"
-	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
 	targetNamespace="http://www.PAHospital.org/RadiologyService/">
 
 	<types>

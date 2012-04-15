@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.PAHopital.org/PhysicianService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PhysicianService"
+	targetNamespace="http://www.PAHopital.org/PhysicianService/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.PAHopital.org/PhysicianService/">
+			<xsd:element name="ExaminationReports">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="LabReport">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="LabOrderID" type="xsd:string" />
+									<xsd:element name="PatientID" type="xsd:string" />
+									<xsd:element name="SampleID" type="xsd:string" />
+									<xsd:element name="LabValues" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="LabParameter" type="xsd:string" />
+												<xsd:element name="LabValue" type="xsd:decimal" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="RadiologyReport">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PatientID" type="xsd:string" />
+									<xsd:element name="RadiologyOrderID" type="xsd:string" />
+									<xsd:element name="DateOfExamination" type="xsd:date" />
+									<xsd:element name="ReportText" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DischargeLetter">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="body" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="DischargeLetterRequest">
+		<wsdl:part name="ExaminationReports" element="tns:ExaminationReports" />
+	</wsdl:message>
+	<wsdl:message name="DischargeLetterResponse">
+		<wsdl:part name="DischargeLetter" element="tns:DischargeLetter" />
+	</wsdl:message>
+
+	<wsdl:portType name="PhysicianService">
+		<wsdl:operation name="RequestDischargeLetter">
+			<wsdl:input name="DischargeLetterRequestMessage" message="tns:DischargeLetterRequest" />
+			<wsdl:output name="DischargeLetterResponseMessage" message="tns:DischargeLetterResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="PhysicianServiceSOAP" type="tns:PhysicianService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="RequestDischargeLetter">
+			<soap:operation
+				soapAction="http://www.PAHopital.org/PhysicianService/RequestDischargeLetter" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="PhysicianService">
+		<wsdl:port binding="tns:PhysicianServiceSOAP" name="PhysicianServiceSOAP">
+			<soap:address location="http://localhost:9080/S2_-_PHYSICIAN/services/PhysicianService" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

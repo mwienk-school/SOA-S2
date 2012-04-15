@@ -11,7 +11,6 @@ BBBBBBBBB PP        EEEEEEEEEE LLLLLLLLLL
 TODO: 
 -Rood in verslag
 -Testing
--Volgens mij wordt de ELSE clause nooit aangeroepen (er wordt nooit een nieuwe patient gemaakt)
 -De physician moet een WSDL hebben (en een invoke ipv de receive in de BPEL)
 
 
