@@ -12,9 +12,8 @@ TODO:
 -Rood in verslag
 -Testing
 -Volgens mij wordt de ELSE clause nooit aangeroepen (er wordt nooit een nieuwe patient gemaakt)
--De payment hoeft niet gedaan te worden, er komt altijd een bericht terug?
--De physician moet een WSDL hebben (niet maken, vermelden)
--De payment eigenlijk ook
+-De physician moet een WSDL hebben (en een invoke ipv de receive in de BPEL)
+
 
 HOWTO DERBY
 ----
