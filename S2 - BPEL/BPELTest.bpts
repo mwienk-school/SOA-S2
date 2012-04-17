@@ -14,12 +14,17 @@
                     <tes:send service="war:Ward" port="WardPort" fault="false">
                         <tes:data>
                             <war:PatientTreatmentOrder>
-                                <PatientID>123</PatientID>
-                                <PatientName>Vincent</PatientName>
+                                <PatientID>15665</PatientID>
+                                <PatientName>Marcus</PatientName>
                             </war:PatientTreatmentOrder>
                         </tes:data>
                     </tes:send>
-                    <tes:receive service="war:Ward" port="WardPort" fault="false"/>
+                    <tes:receive service="war:Ward" port="WardPort" fault="false">
+                        <tes:condition>
+                            <tes:expression>//body</tes:expression>
+                            <tes:value>'Patient seems healthy'</tes:value>
+                        </tes:condition>
+                    </tes:receive>
                 </tes:sendReceive>
             </tes:clientTrack>
         </tes:testCase>

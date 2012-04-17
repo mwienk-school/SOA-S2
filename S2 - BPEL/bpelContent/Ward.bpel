@@ -17,18 +17,23 @@
 		namespace="http://www.PAHospital.org/TransportationService/"
 		importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="LabService.wsdl"
-		namespace="http://www.PAHospital.org/LabService/" importType="http://schemas.xmlsoap.org/wsdl/" />
+		namespace="http://www.PAHospital.org/LabService/" 
+		importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="LabService-callback.wsdl"
-		namespace="http://www.PAHospital.org/LabCallbackService/" importType="http://schemas.xmlsoap.org/wsdl/" />
+		namespace="http://www.PAHospital.org/LabCallbackService/" 
+		importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="PatService.wsdl"
-		namespace="http://www.PAHospital.org/PatService/" importType="http://schemas.xmlsoap.org/wsdl/" />
+		namespace="http://www.PAHospital.org/PatService/" 
+		importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="RadService.wsdl"
-		namespace="http://www.PAHospital.org/RadiologyService/" importType="http://schemas.xmlsoap.org/wsdl/" />
+		namespace="http://www.PAHospital.org/RadiologyService/" 
+		importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="RadService-callback.wsdl"
 		namespace="http://www.PAHospital.org/RadiologyCallbackService/"
 		importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="PhysicianService.wsdl"
-		namespace="http://www.PAHopital.org/PhysicianService/" importType="http://schemas.xmlsoap.org/wsdl/" />
+		namespace="http://www.PAHopital.org/PhysicianService/" 
+		importType="http://schemas.xmlsoap.org/wsdl/" />
 
 	<!-- ================================================================= -->
 	<!-- ORCHESTRATION LOGIC -->
@@ -51,40 +56,27 @@
 	</bpel:partnerLinks>
 
 	<bpel:variables>
-		<bpel:variable name="WardServiceRequest"
-			messageType="ward:WardOrderPatientTreatmentRequest" />
-		<bpel:variable name="WardServiceResponse"
-			messageType="ward:WardOrderPatientTreatmentResponse" />
+		<bpel:variable name="WardServiceRequest" messageType="ward:WardOrderPatientTreatmentRequest" />
+		<bpel:variable name="WardServiceResponse" messageType="ward:WardOrderPatientTreatmentResponse" />
 		<bpel:variable name="GetPatientIDRequest" messageType="pat:GetPatientIDsRequest" />
 		<bpel:variable name="GetPatientIDResponse" messageType="pat:GetPatientIDsResponse" />
 		<bpel:variable name="CreatePatientRequest" messageType="pat:CreatePatientRecordRequest" />
 		<bpel:variable name="CreatePatientResponse" messageType="pat:CreatePatientRecordResponse" />
-		<bpel:variable name="OrderRadiologyExamRequest"
-			messageType="rad:RadiologyOrderRadExaminationRequest" />
-		<bpel:variable name="OrderRadiologyExamResponse"
-			messageType="rad:RadiologyOrderRadExaminationResponse" />
+		<bpel:variable name="OrderRadiologyExamRequest" messageType="rad:RadiologyOrderRadExaminationRequest" />
+		<bpel:variable name="OrderRadiologyExamResponse" messageType="rad:RadiologyOrderRadExaminationResponse" />
 		<bpel:variable name="OrderLabTestRequest" messageType="lab:LaboratoryOrderLabTestRequest" />
 		<bpel:variable name="OrderLabTestResponse" messageType="lab:LaboratoryOrderLabTestResponse" />
-		<bpel:variable name="RadiologyAppointmentRequest"
-			messageType="rad:RadiologyRequestAppointmentRequest" />
-		<bpel:variable name="RadiologyAppointmentResponse"
-			messageType="rad:RadiologyRequestAppointmentResponse" />
-		<bpel:variable name="RadPatientTransportRequest"
-			messageType="ts:OrderPatientTransportRequest" />
-		<bpel:variable name="LabSampleTransportRequest"
-			messageType="ts:OrderSampleTransportRequest" />
-		<bpel:variable name="RadiologyReportResponse"
-			messageType="radcb:RadiologyReportRequest" />
-		<bpel:variable name="StoreRadiologyReportRequest"
-			messageType="pat:StoreRadiologyReportRequest" />
+		<bpel:variable name="RadiologyAppointmentRequest" messageType="rad:RadiologyRequestAppointmentRequest" />
+		<bpel:variable name="RadiologyAppointmentResponse" messageType="rad:RadiologyRequestAppointmentResponse" />
+		<bpel:variable name="RadPatientTransportRequest" messageType="ts:OrderPatientTransportRequest" />
+		<bpel:variable name="LabSampleTransportRequest" messageType="ts:OrderSampleTransportRequest" />
+		<bpel:variable name="RadiologyReportResponse" messageType="radcb:RadiologyReportRequest" />
+		<bpel:variable name="StoreRadiologyReportRequest" messageType="pat:StoreRadiologyReportRequest" />
 		<bpel:variable name="LabReportResponse" messageType="labcb:SendLabReportResponse" />
 		<bpel:variable name="StoreLabReportRequest" messageType="pat:StoreLabReportRequest" />
-		<bpel:variable name="RadiologyMakePaymentRequest"
-			messageType="rad:RadiologyMakePaymentRequest" />
-		<bpel:variable name="PhysicianServiceResponse"
-			messageType="phys:DischargeLetterResponse" />
-		<bpel:variable name="PhysicianServiceRequest"
-			messageType="phys:DischargeLetterRequest" />
+		<bpel:variable name="RadiologyMakePaymentRequest" messageType="rad:RadiologyMakePaymentRequest" />
+		<bpel:variable name="PhysicianServiceResponse" messageType="phys:DischargeLetterResponse" />
+		<bpel:variable name="PhysicianServiceRequest" messageType="phys:DischargeLetterRequest" />
 	</bpel:variables>
 
 	<bpel:correlationSets>
@@ -256,7 +248,7 @@
 			<bpel:links>
 				<bpel:link name="RadiologyReport" />
 				<bpel:link name="LaboratoryReport" />
-				<bpel:link name="link1" />
+				<bpel:link name="PaymentRequest" />
 			</bpel:links>
 			<bpel:sequence name="Radiology">
 				<bpel:invoke name="Invoke-RadiologyExam" partnerLink="RadService"
@@ -322,7 +314,7 @@
 						</bpel:to>
 					</bpel:copy>
 					<bpel:sources>
-						<bpel:source linkName="link1" />
+						<bpel:source linkName="PaymentRequest" />
 					</bpel:sources>
 					<bpel:copy>
 						<bpel:from part="RadiologyOrderID" variable="OrderRadiologyExamResponse"></bpel:from>
@@ -373,7 +365,7 @@
 			<bpel:invoke name="Invoke-MakePayment" partnerLink="RadService"
 				operation="MakePayment" portType="rad:Radiology" inputVariable="RadiologyMakePaymentRequest">
 				<bpel:targets>
-					<bpel:target linkName="link1" />
+					<bpel:target linkName="PaymentRequest" />
 				</bpel:targets>
 			</bpel:invoke>
 			<bpel:sequence name="Laboratory">

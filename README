@@ -8,12 +8,6 @@ BB    BBB PP        EE         LL
 BBBBBBBBB PP        EEEEEEEEEE LLLLLLLLLL
 =========================================
 
-TODO: 
--Rood in verslag
--Testing
--De physician moet een WSDL hebben (en een invoke ipv de receive in de BPEL)
-
-
 HOWTO DERBY
 ----
 Download derby van de apache website (db.apache.org/derby)
